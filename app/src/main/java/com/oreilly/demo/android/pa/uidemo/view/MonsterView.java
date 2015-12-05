@@ -62,7 +62,20 @@ public class MonsterView extends View {
         paint.setStyle(Style.STROKE);
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() -1, paint);
-
+        paint.setColor(Color.BLACK);
+        int countx =0;
+        int county = 0;
+        int countx2 = 0;
+        int county2 = 0;
+        for (int x = 0; x < 10; x++)
+        {
+            canvas.drawLine(countx, county, countx, getHeight() - 1, paint);
+            countx += getWidth() / 10;
+        }
+        for (int y = 0; y < getWidth() - 1; y++) {
+            canvas.drawLine(countx2, county2, getWidth() - 1, county2, paint);
+            county2 += getHeight()/10;
+        }
         if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
