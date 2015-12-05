@@ -9,6 +9,7 @@
     android:baselineAligned="false">
 
   <com.oreilly.demo.android.pa.uidemo.view.MonsterView
+        android:screenOrientation="portrait"
         android:id="@+id/monsters"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
