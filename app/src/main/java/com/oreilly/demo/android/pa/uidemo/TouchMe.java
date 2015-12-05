@@ -113,7 +113,7 @@ public class TouchMe extends Activity {
         setContentView(R.layout.main);
 //
         // find the monsters view
-        monsterView = (MonsterView) findViewById(R.id.dots);
+        monsterView = (MonsterView) findViewById(R.id.monsters);
         monsterView.setMonsters(monsterModel);
 
         monsterView.setOnCreateContextMenuListener(this);

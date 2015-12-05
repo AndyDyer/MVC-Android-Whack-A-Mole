@@ -8,8 +8,8 @@
     android:layout_height="wrap_content"
     android:baselineAligned="false">
 
-  <com.oreilly.demo.android.pa.uidemo.view.DotView
-        android:id="@+id/dots"
+  <com.oreilly.demo.android.pa.uidemo.view.MonsterView
+        android:id="@+id/monsters"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
