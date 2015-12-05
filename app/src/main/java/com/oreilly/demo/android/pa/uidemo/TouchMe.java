@@ -111,7 +111,7 @@ public class TouchMe extends Activity {
 
         // install the view
         setContentView(R.layout.main);
-
+//
         // find the monsters view
         monsterView = (MonsterView) findViewById(R.id.dots);
         monsterView.setMonsters(monsterModel);
