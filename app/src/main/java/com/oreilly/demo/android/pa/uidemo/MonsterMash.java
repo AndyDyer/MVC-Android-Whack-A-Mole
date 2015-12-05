@@ -56,7 +56,15 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-
+            for (final Integer i: tracks) {
+                final int idx = evt.findPointerIndex(i);
+                addMonster(
+                        mMonsters,
+                        evt.getX(idx),
+                        evt.getY(idx),
+                        evt.getPressure(idx),
+                        evt.getSize(idx));
+            }
             return true;
         }
 
