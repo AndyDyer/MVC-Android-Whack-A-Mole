@@ -80,7 +80,6 @@ public class MonsterView extends View {
         if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
-        //Remove
         /*for (final Monster monster : monsters.getMonsters()) {
             paint.setColor(monster.getColor());
             canvas.drawCircle(
