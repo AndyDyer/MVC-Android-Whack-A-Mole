@@ -63,6 +63,7 @@ public class MonsterView extends View {
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() -1, paint);
         paint.setColor(Color.BLACK);
+        paint.setStrokeWidth(4);
         int countx =0;
         int county = 0;
         int countx2 = 0;
@@ -79,13 +80,14 @@ public class MonsterView extends View {
         if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
-        for (final Monster monster : monsters.getMonsters()) {
+        //Remove
+        /*for (final Monster monster : monsters.getMonsters()) {
             paint.setColor(monster.getColor());
             canvas.drawCircle(
                     monster.getX(),
                     monster.getY(),
                     monster.getDiameter(),
                     paint);
-        }
+        }*/
     }
 }

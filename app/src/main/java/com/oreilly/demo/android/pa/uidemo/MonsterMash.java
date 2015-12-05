@@ -27,7 +27,9 @@ import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 public class MonsterMash extends Activity {
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
-
+    /** Score and Timer*/
+    public int timeremaining = 30;
+    public int score = 0;
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
         private final Monsters mMonsters;
@@ -50,10 +52,6 @@ public class MonsterMash extends Activity {
                         >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
                     tracks.remove(evt.getPointerId(idx2));
                     break;
-
-
-
-
                 default:
                     return false;
             }
@@ -68,7 +66,7 @@ public class MonsterMash extends Activity {
                 final float y,
                 final float p,
                 final float s) {
-            monsters.addMonster(x, y, Color.CYAN, (int) ((p + 0.5) * (s + 0.5) * DOT_DIAMETER));
+            monsters.addMonster(x, y, Color.CYAN);
         }
     }
 
@@ -119,23 +117,24 @@ public class MonsterMash extends Activity {
             return true;
         });
 
-        // wire up the controller
+
         findViewById(R.id.button1).setOnClickListener((final View v) ->
-            makeMonster(monsterModel, monsterView, Color.RED)
+                        onResume()
         );
         findViewById(R.id.button2).setOnClickListener((final View v) ->
-            makeMonster(monsterModel, monsterView, Color.GREEN)
+                        onPause()
         );
-
+        // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
-            tb1.setText((null == d) ? "" : String.valueOf(d.getX()));
-            tb2.setText((null == d) ? "" : String.valueOf(d.getY()));
+            tb1.setText("Score: " + score);
+            tb2.setText("Time Left: " + timeremaining);
             monsterView.invalidate();
         });
     }
+
 
     @Override public void onResume() {
         super.onResume();
@@ -203,11 +202,9 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     void makeMonster(final Monsters monsters, final MonsterView view, final int color) {
-        final int pad = (DOT_DIAMETER + 2) * 2;
         monsters.addMonster(
-            DOT_DIAMETER + (rand.nextFloat() * (view.getWidth() - pad)),
-            DOT_DIAMETER + (rand.nextFloat() * (view.getHeight() - pad)),
-            color,
-            DOT_DIAMETER);
+                (rand.nextFloat() / (view.getWidth()/10)),
+                (rand.nextFloat() / (view.getHeight()/10)),
+            color);
     }
 }

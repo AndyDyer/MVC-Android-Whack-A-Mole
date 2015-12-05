@@ -34,10 +34,9 @@ public class Monsters {
      * @param x dot horizontal coordinate.
      * @param y dot vertical coordinate.
      * @param color dot color.
-     * @param diameter dot size.
      */
-    public void addMonster(final float x, final float y, final int color, final int diameter) {
-        monsters.add(new Monster(x, y, color, diameter));
+    public void addMonster(final float x, final float y, final int color) {
+        monsters.add(new Monster(x, y, color));
         notifyListener();
     }
 
