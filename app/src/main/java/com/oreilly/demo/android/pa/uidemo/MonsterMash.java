@@ -24,7 +24,7 @@ import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
 
 /** Android UI demo program */
-public class TouchMe extends Activity {
+public class MonsterMash extends Activity {
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
 
@@ -51,35 +51,13 @@ public class TouchMe extends Activity {
                     tracks.remove(evt.getPointerId(idx2));
                     break;
 
-                case MotionEvent.ACTION_MOVE:
-                    final int n = evt.getHistorySize();
-                    for (Integer i: tracks) {
-                        final int idx = evt.findPointerIndex(i);
-                        for (int j = 0; j < n; j++) {
-                            addMonster(
-                                mMonsters,
-                                evt.getHistoricalX(idx, j),
-                                evt.getHistoricalY(idx, j),
-                                evt.getHistoricalPressure(idx, j),
-                                evt.getHistoricalSize(idx, j));
-                        }
-                    }
-                    break;
+
 
 
                 default:
                     return false;
             }
 
-            for (final Integer i: tracks) {
-                final int idx = evt.findPointerIndex(i);
-                addMonster(
-                    mMonsters,
-                    evt.getX(idx),
-                    evt.getY(idx),
-                    evt.getPressure(idx),
-                    evt.getSize(idx));
-            }
 
             return true;
         }
