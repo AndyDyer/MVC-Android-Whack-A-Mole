@@ -116,14 +116,6 @@ public class MonsterMash extends Activity {
 
             return true;
         });
-
-
-        findViewById(R.id.button1).setOnClickListener((final View v) ->
-                        onResume()
-        );
-        findViewById(R.id.button2).setOnClickListener((final View v) ->
-                        onPause()
-        );
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
