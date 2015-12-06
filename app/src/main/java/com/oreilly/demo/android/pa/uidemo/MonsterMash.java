@@ -56,7 +56,7 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-            for (final Integer i: tracks) {
+           /* for (final Integer i: tracks) {
                 final int idx = evt.findPointerIndex(i);
                 addMonster(
                         mMonsters,
@@ -64,18 +64,18 @@ public class MonsterMash extends Activity {
                         evt.getY(idx),
                         evt.getPressure(idx),
                         evt.getSize(idx));
-            }
+            }*/
             return true;
         }
 
-        private void addMonster(
+       /* private void addMonster(
                 final Monsters monsters,
                 final float x,
                 final float y,
                 final float p,
                 final float s) {
             monsters.addMonster(x, y, Color.CYAN);
-        }
+        }*/
     }
 
     private final Random rand = new Random();
@@ -120,7 +120,7 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-            makeMonster(monsterModel, monsterView, color);
+           // makeMonster(monsterModel, monsterView, color);
 
             return true;
         });
@@ -202,9 +202,11 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     void makeMonster(final Monsters monsters, final MonsterView view, final int color) {
-        monsters.addMonster(
-                (rand.nextFloat() / (view.getWidth()/10)),
-                (rand.nextFloat() / (view.getHeight()/10)),
-            color);
+        /*monsters.addMonster(
+                ((view.getWidth()/10) * rand.nextInt(10)%10),
+                ((view.getHeight()/10) * rand.nextInt(10)%10),
+            color);*/
+
+        monsters.addMonster(3,3,color);
     }
 }
