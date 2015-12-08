@@ -203,11 +203,11 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     void makeMonster(final Monsters monsters, final MonsterView view, final int color) {
-        /*monsters.addMonster(
-                ((view.getWidth()/10) * rand.nextInt(10)%10),
-                ((view.getHeight()/10) * rand.nextInt(10)%10),
-            color);*/
-
+        monsters.addMonster(
+                //ADJ WIDTH/HEIGHT = GetWidth()/10
+                ((view.getAdj_width()) * rand.nextInt(10)%10),
+                ((view.getAdj_height()) * rand.nextInt(10)%10),
+            color);
         monsters.addMonster(3,3,color);
     }
 }

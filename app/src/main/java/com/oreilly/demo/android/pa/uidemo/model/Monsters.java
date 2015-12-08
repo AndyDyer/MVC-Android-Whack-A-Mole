@@ -55,7 +55,7 @@ public class Monsters {
      * @param color dot color.
      */
     public void addMonster(final int x, final int y, final int color) {
-        int column ;
+        int column;
         int row;
         monsterArray[x][y] = new Monster(x, y, color);
         //monsters.add(new Monster(x, y, color));
