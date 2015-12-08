@@ -1,5 +1,6 @@
 package com.oreilly.demo.android.pa.uidemo.model;
 
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,7 +15,8 @@ public class Monsters {
 
     private final LinkedList<Monster> monsters = new LinkedList<>();
     private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
-    public Monster[][] monsterArray = new Monster[10][10];
+
+    Monster[][] monsterArray = new Monster[10][10];
 
 
 
@@ -31,7 +33,21 @@ public class Monsters {
     }
 
     /** @return immutable list of dots. */
-    public List<Monster> getMonsters() { return safeMonsters; }
+    public List<Monster> getMonsters() {
+        //safeMonsters;
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                if(!spaceEmpty(i,j)){
+                    safeMonsters.add(monsterArray[i][j]);
+                }
+            }
+        }
+        return safeMonsters;
+    }
+
+
 
     /**
      * @param x dot horizontal coordinate.
@@ -84,4 +100,5 @@ public class Monsters {
         if (null != monstersChangeListener) {
             monstersChangeListener.onMonstersChange(this);
         }
-    }}
+    }
+}

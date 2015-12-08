@@ -37,6 +37,7 @@ public class MonsterMash extends Activity {
 
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
+        //TODO get this to check and delete
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
             switch (action & MotionEvent.ACTION_MASK) {
