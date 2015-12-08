@@ -21,8 +21,7 @@ import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 public class MonsterView extends View {
 
     private volatile Monsters monsters;
-    private int adj_width;
-    private int adj_height;
+
     /**
      * @param context the rest of the application
      */
@@ -54,14 +53,11 @@ public class MonsterView extends View {
      * @param monsters
      */
     public void setMonsters(final Monsters monsters) { this.monsters = monsters; }
-    public void setAdj_vals(){this.adj_width = getWidth()/10;this.adj_height = getHeight()/10;}
-    public int getAdj_width(){return adj_width;}
-    public int getAdj_height(){return adj_height;}
+
     /**
      * @see android.view.View#onDraw(android.graphics.Canvas)
      */
     @Override protected void onDraw(final Canvas canvas) {
-        setAdj_vals();
         final Paint paint = new Paint();
         paint.setStyle(Style.STROKE);
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
@@ -75,26 +71,26 @@ public class MonsterView extends View {
         for (int x = 0; x < 10; x++)
         {
             canvas.drawLine(countx, county, countx, getHeight() - 1, paint);
-            countx += adj_width;
+            countx += getWidth() / 10;
         }
         for (int y = 0; y < getWidth() - 1; y++) {
             canvas.drawLine(countx2, county2, getWidth() - 1, county2, paint);
-            county2 += adj_height;
+            county2 += getHeight()/10;
         }
         if (null == monsters) { return; }
 
         paint.setStyle(Style.FILL);
         //
-        for (final Monster monster : monsters.getMonsters()) {
+        for (final Monster monster : monsters.getMonsters()){
             paint.setColor(monster.getColor());
-           // paint.setColor(Color.RED);
-            /*canvas.drawCircle(
+            paint.setColor(Color.RED);
+            canvas.drawCircle(
                     monster.getX(),
-                    monster.getY(),
-                    50,
-                    paint);*/
+                    monster.getY(),50,
+                    paint);
             paint.setColor(Color.GREEN);
             canvas.drawRect(monster.getX(),monster.getY(), monster.getX() + (getWidth()/10), monster.getY()+(getHeight()/10),paint);
+
         }
     }
 }

@@ -37,7 +37,6 @@ public class MonsterMash extends Activity {
 
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
 
-        //TODO get this to check and delete
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
             switch (action & MotionEvent.ACTION_MASK) {
@@ -57,7 +56,7 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-           /* for (final Integer i: tracks) {
+            for (final Integer i: tracks) {
                 final int idx = evt.findPointerIndex(i);
                 addMonster(
                         mMonsters,
@@ -65,18 +64,18 @@ public class MonsterMash extends Activity {
                         evt.getY(idx),
                         evt.getPressure(idx),
                         evt.getSize(idx));
-            }*/
+            }
             return true;
         }
 
-       /* private void addMonster(
+        private void addMonster(
                 final Monsters monsters,
                 final float x,
                 final float y,
                 final float p,
                 final float s) {
             monsters.addMonster(x, y, Color.CYAN);
-        }*/
+        }
     }
 
     private final Random rand = new Random();
@@ -121,7 +120,7 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-           // makeMonster(monsterModel, monsterView, color);
+            makeMonster(monsterModel, monsterView, color);
 
             return true;
         });
@@ -202,12 +201,11 @@ public class MonsterMash extends Activity {
      * @param view the view in which we're drawing monsters
      * @param color the color of the monster
      */
-    void makeMonster(final Monsters monsters, final MonsterView view, final int color) {
+    void makeMonster(final Monsters monsters, final MonsterView view, int color) {
+        color = Color.MAGENTA;
         monsters.addMonster(
-                //ADJ WIDTH/HEIGHT = GetWidth()/10
-                ((view.getAdj_width()) * (rand.nextInt(10)%10)),
-                ((view.getAdj_height()) * (rand.nextInt(10)%10)),
+                (rand.nextInt(view.getWidth()) / (view.getWidth()/10)),
+                (rand.nextInt(view.getHeight()) / (view.getHeight()/10)),
             color);
-        monsters.addMonster(3,3,color);
     }
 }

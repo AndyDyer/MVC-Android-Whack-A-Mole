@@ -6,7 +6,6 @@ public final class Monster {
     private final float x, y;
     private final int color;
 
-
     /**
      * @param x horizontal coordinate.
      * @param y vertical coordinate.
