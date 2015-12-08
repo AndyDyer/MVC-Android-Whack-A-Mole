@@ -3,7 +3,7 @@ package com.oreilly.demo.android.pa.uidemo.model;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-
+import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
 /** A list of dots. */
 public class Monsters {
@@ -11,7 +11,7 @@ public class Monsters {
     public interface MonstersChangeListener {
         void onMonstersChange(Monsters monster);
     }
-
+    private volatile MonsterView view;
     private final LinkedList<Monster> monsters = new LinkedList<>();
     private final List<Monster> safeMonsters = Collections.unmodifiableList(monsters);
     Monster[][] monsterArray = new Monster[10][10];
@@ -25,7 +25,9 @@ public class Monsters {
     /** @return the most recently added dot. */
     public Monster getLastMonster() {
         return (monsters.size() <= 0) ? null : monsters.getLast();
+
     }
+
 
     /** @return immutable list of dots. */
     public List<Monster> getMonsters() { return safeMonsters; }
@@ -40,8 +42,19 @@ public class Monsters {
         monsterArray[x][y] = new Monster(x, y, color);
         monsters.add(new Monster(x, y, color));
         notifyListener();
+
     }
 
+    public int getX(int x, int y){
+       return (int) monsterArray[x][y].getX();
+    }
+    public int getY(int x, int y){
+        return (int) monsterArray[x][y].getY();
+    }
+
+    public int getColor(int x, int y){
+        return monsterArray[x][y].getColor();
+    }
     /** Remove all dots. */
     public void clearMonsters() {
         for(int i = 0; i<10; i++) {
@@ -50,6 +63,7 @@ public class Monsters {
             }
         }
         notifyListener();
+
     }
 
     public int checkState (int x, int y){

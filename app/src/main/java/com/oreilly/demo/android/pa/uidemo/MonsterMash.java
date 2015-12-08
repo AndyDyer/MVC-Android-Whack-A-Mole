@@ -25,6 +25,8 @@ import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
 /** Android UI demo program */
 public class MonsterMash extends Activity {
+
+
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
     /** Score and Timer*/
@@ -74,7 +76,7 @@ public class MonsterMash extends Activity {
                 final float y,
                 final float p,
                 final float s) {
-            monsters.addMonster(x, y, Color.CYAN);
+                monsters.addMonster((int) x,(int) y, Color.CYAN);
         }
     }
 
@@ -201,11 +203,21 @@ public class MonsterMash extends Activity {
      * @param view the view in which we're drawing monsters
      * @param color the color of the monster
      */
+    int x = 0;
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
+        if (x <= 0){
+            monsters.clearMonsters();
+            x++;
+        }
         color = Color.MAGENTA;
-        monsters.addMonster(
+        /*monsters.addMonster(
                 (rand.nextInt(10) * (view.getWidth()/10)),
                 (rand.nextInt(10) * (view.getHeight()/10)),
             color);
+            */
+        monsters.addMonster(0,0,color);
+        monsters.addMonster(3,3,color);
+        monsters.addMonster(1,4,color);
+        monsters.addMonster(9,8,color);
     }
 }
