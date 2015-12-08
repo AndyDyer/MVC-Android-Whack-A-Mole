@@ -30,7 +30,7 @@ public class Monsters {
 
 
     /** @return immutable list of dots. */
-    public List<Monster> getMonsters() { return safeMonsters; }
+    //public List<Monster> getMonsters() { return safeMonsters; }
 
     /**
      * @param x dot horizontal coordinate.
@@ -38,8 +38,8 @@ public class Monsters {
      * @param color dot color.
      */
     public void addMonster(final int x, final int y, final int color) {
-
-        monsterArray[x][y] = new Monster(x, y, color);
+        if (spaceEmpty(x,y))
+            monsterArray[x][y] = new Monster(x, y, color);
        // monsters.add(new Monster(x, y, color));
         notifyListener();
 

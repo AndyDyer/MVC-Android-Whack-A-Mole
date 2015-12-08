@@ -215,9 +215,9 @@ public class MonsterMash extends Activity {
                 (rand.nextInt(10) * (view.getHeight()/10)),
             color);
             */
-        monsters.addMonster(5,5,color);
-       // monsters.addMonster(3,3,color);
-        //monsters.addMonster(1,4,color);
-        //monsters.addMonster(9,8,color);
+        monsters.addMonster(2,2,color);
+       monsters.addMonster(2,3,color);
+        monsters.addMonster(1,4,color);
+        monsters.addMonster(0,0,color);
     }
 }

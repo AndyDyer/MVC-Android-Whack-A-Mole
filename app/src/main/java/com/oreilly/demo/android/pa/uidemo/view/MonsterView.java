@@ -64,39 +64,43 @@ public class MonsterView extends View {
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() - 1, paint);
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(4);
-        int countx =0;
+        int countx = 0;
         int county = 0;
         int countx2 = 0;
         int county2 = 0;
-        for (int x = 0; x < 10; x++)
-        {
+        for (int x = 0; x < 10; x++) {
             canvas.drawLine(countx, county, countx, getHeight() - 1, paint);
             countx += getWidth() / 10;
         }
         for (int y = 0; y < getWidth() - 1; y++) {
             canvas.drawLine(countx2, county2, getWidth() - 1, county2, paint);
-            county2 += getHeight()/10;
+            county2 += getHeight() / 10;
         }
-        if (null == monsters) { return; }
+        if (null == monsters) {
+            return;
+        }
 
         paint.setStyle(Style.FILL);
         //
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; i < 10; i++) {
-                if (!monsters.spaceEmpty(i,j)) {
-                    paint.setColor(monsters.getMonster(i, j).getColor());
 
 
+            for (int i = 0; i < 10; i++) {
+                for (int j = 0; j < 10; j++) {
+                    if (!monsters.spaceEmpty(i, j)) {
 
-                    canvas.drawRect
-                            (monsters.getMonster(i, j).getX() * (getWidth() / 10),
-                                    (monsters.getMonster(i, j).getY() * (getHeight() / 10)),
-                                    (((monsters.getMonster(i, j).getX() + 1) *(getWidth() / 10))),
+                        paint.setColor(monsters.getMonster(i, j).getColor());
+                        canvas.drawRect
+                                (monsters.getMonster(i, j).getX() * (getWidth() / 10),
+                                        (monsters.getMonster(i, j).getY() * (getHeight() / 10)),
+                                        (((monsters.getMonster(i, j).getX() + 1) * (getWidth() / 10))),
 
-                                    (((monsters.getMonster(i, j).getY() + 1) * (getHeight() / 10))) ,
-                                    paint);
+                                        (((monsters.getMonster(i, j).getY() + 1) * (getHeight() / 10))),
+                                        paint);
+
+                    }
                 }
+
             }
-        }
+
     }
 }
