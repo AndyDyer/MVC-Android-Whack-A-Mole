@@ -40,7 +40,7 @@ public class Monsters {
     public void addMonster(final int x, final int y, final int color) {
 
         monsterArray[x][y] = new Monster(x, y, color);
-        monsters.add(new Monster(x, y, color));
+       // monsters.add(new Monster(x, y, color));
         notifyListener();
 
     }
@@ -66,6 +66,13 @@ public class Monsters {
 
     }
 
+    public Monster getMonster(int i, int j){
+
+        return monsterArray[i][j];
+
+
+
+    }
     public int checkState (int x, int y){
         Monster temp = monsterArray[x][y];
         int color = temp.getColor();

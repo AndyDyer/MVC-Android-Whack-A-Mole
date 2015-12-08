@@ -84,14 +84,17 @@ public class MonsterView extends View {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; i < 10; i++) {
                 if (!monsters.spaceEmpty(i,j)) {
-                    paint.setColor(monsters.getColor(i, j));
-                    paint.setColor(Color.RED);
-                    canvas.drawCircle(
-                            monsters.getX(i,j),
-                            monsters.getY(i,j), 50,
-                            paint);
-                    paint.setColor(Color.GREEN);
-                    canvas.drawRect(monsters.getX(i,j), monsters.getY(i,j), monsters.getX(i,j) + (getWidth() / 10), monsters.getY(i,j) + (getHeight() / 10), paint);
+                    paint.setColor(monsters.getMonster(i, j).getColor());
+
+
+
+                    canvas.drawRect
+                            (monsters.getMonster(i, j).getX() * (getWidth() / 10),
+                                    (monsters.getMonster(i, j).getY() * (getHeight() / 10)),
+                                    (((monsters.getMonster(i, j).getX() + 1) *(getWidth() / 10))),
+
+                                    (((monsters.getMonster(i, j).getY() + 1) * (getHeight() / 10))) ,
+                                    paint);
                 }
             }
         }
