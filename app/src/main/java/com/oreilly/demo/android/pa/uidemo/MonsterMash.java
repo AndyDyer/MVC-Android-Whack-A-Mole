@@ -204,8 +204,8 @@ public class MonsterMash extends Activity {
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
         color = Color.MAGENTA;
         monsters.addMonster(
-                (rand.nextInt(view.getWidth()) / (view.getWidth()/10)),
-                (rand.nextInt(view.getHeight()) / (view.getHeight()/10)),
+                (rand.nextInt(10) * (view.getWidth()/10)),
+                (rand.nextInt(10) * (view.getHeight()/10)),
             color);
     }
 }
