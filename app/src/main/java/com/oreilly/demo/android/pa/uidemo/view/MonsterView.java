@@ -38,6 +38,25 @@ public class MonsterView extends View {
         super(context, attrs);
         setFocusableInTouchMode(true);
     }
+    public void DrawGrid(Canvas mycanvas, Paint mypaint)
+    {
+        int countx = 0;
+        int county = 0;
+        int countx2 = 0;
+        int county2 = 0;
+        for (int x = 0; x < 10; x++) {
+            mycanvas.drawLine(countx, county, countx, getHeight() - 1, mypaint);
+            countx += getWidth() / 10;
+        }
+        for (int y = 0; y < getWidth() - 1; y++) {
+            mycanvas.drawLine(countx2, county2, getWidth() - 1, county2, mypaint);
+            county2 += getHeight() / 10;
+        }
+        countx = 0;
+        county = 0;
+        countx2 = 0;
+        county2 = 0;
+    }
 
     /**
      * @param context
@@ -66,6 +85,11 @@ public class MonsterView extends View {
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(4);
         /** grid */
+        final Paint paintb = new Paint();
+        paintb.setColor(Color.BLACK);
+        paintb.setStrokeWidth(4);
+        DrawGrid(canvas,paintb);
+        /*
         int countx = 0;
         int county = 0;
         int countx2 = 0;
@@ -78,7 +102,7 @@ public class MonsterView extends View {
             canvas.drawLine(countx2, county2, getWidth() - 1, county2, paint);
             county2 += getHeight() / 10;
         }
-
+        */
 
         /** Monster Drawing*/
         if (null == monsters)
@@ -101,6 +125,7 @@ public class MonsterView extends View {
 
                                         (((monsters.getMonster(i, j).getY() + 1) * (getHeight() / 10))),
                                         paint);
+                        DrawGrid(canvas,paintb);
 
                     }
                 }

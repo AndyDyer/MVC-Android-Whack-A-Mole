@@ -122,6 +122,7 @@ public class MonsterMash extends Activity {
             }
             int color = Color.RED;
             makeMonster(monsterModel, monsterView, color);
+
             //TODO I Think something needs to happen here look up up here
             return true;
         });
