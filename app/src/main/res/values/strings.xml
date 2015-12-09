@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TouchMe</string>
+    <string name="app_name">MonsterMash</string>
     <string name="defaultText">0</string>
     <string name="labelRed">Red</string>
     <string name="labelGreen">Green</string>

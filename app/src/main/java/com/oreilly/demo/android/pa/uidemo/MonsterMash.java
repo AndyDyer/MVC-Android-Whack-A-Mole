@@ -63,14 +63,19 @@ public class MonsterMash extends Activity {
             for (final Integer i: tracks)
             {
                 final int idx = evt.findPointerIndex(i);
+
                 double q = evt.getX(idx) / (monsterViewz.getWidth() / 10);
                 Math.floor(q);
                 int myq = (int)q;
                 double p = evt.getY(idx) / (monsterViewz.getHeight() / 10);
                 Math.floor(p);
                 int myp = (int)p;
+
+
                 String myheight = String.valueOf (myp);
                 Log.d(" height ", myheight);
+
+
                 if (Color.GREEN == mMonsters.checkState(myq,myp))
                 {
                     mMonsters.removeMonster(myq,myp);
@@ -120,10 +125,6 @@ public class MonsterMash extends Activity {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
-            int color = Color.RED;
-            makeMonster(monsterModel, monsterView, color);
-
-            //TODO I Think something needs to happen here look up up here
             return true;
         });
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
