@@ -135,6 +135,14 @@ public class MonsterMash extends Activity {
             tb2.setText("Time Left: " + timeremaining);
             monsterView.invalidate();
         });
+
+        findViewById(R.id.button1).setOnClickListener((final View v) ->
+                        onPause()
+        );
+        findViewById(R.id.button2).setOnClickListener((final View v) ->
+                        onResume()
+        );
+
     }
 
 
@@ -210,14 +218,11 @@ public class MonsterMash extends Activity {
             x++;
         }
         color = Color.MAGENTA;
-        /*monsters.addMonster(
-                (rand.nextInt(10) * (view.getWidth()/10)),
-                (rand.nextInt(10) * (view.getHeight()/10)),
-            color);
-            */
-        monsters.addMonster(2,2,color);
-       monsters.addMonster(2,3,color);
-        monsters.addMonster(1,4,color);
-        monsters.addMonster(0,0,color);
+
+            monsters.addMonster(
+                    (rand.nextInt(10)),
+                    (rand.nextInt(10)),
+                    color);
+
     }
 }

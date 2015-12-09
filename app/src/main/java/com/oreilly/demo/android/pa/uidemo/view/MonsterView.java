@@ -58,12 +58,14 @@ public class MonsterView extends View {
      * @see android.view.View#onDraw(android.graphics.Canvas)
      */
     @Override protected void onDraw(final Canvas canvas) {
+        /** paint setup*/
         final Paint paint = new Paint();
         paint.setStyle(Style.STROKE);
         paint.setColor(hasFocus() ? Color.BLUE : Color.GRAY);
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() - 1, paint);
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(4);
+        /** grid */
         int countx = 0;
         int county = 0;
         int countx2 = 0;
@@ -76,12 +78,15 @@ public class MonsterView extends View {
             canvas.drawLine(countx2, county2, getWidth() - 1, county2, paint);
             county2 += getHeight() / 10;
         }
-        if (null == monsters) {
+
+
+        /** Monster Drawing*/
+        if (null == monsters)
+        {
             return;
         }
 
         paint.setStyle(Style.FILL);
-        //
 
 
             for (int i = 0; i < 10; i++) {
