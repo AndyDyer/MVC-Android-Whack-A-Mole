@@ -9,6 +9,7 @@ import java.util.TimerTask;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -38,6 +39,7 @@ public class MonsterMash extends Activity {
         private List<Integer> tracks = new ArrayList<>();
 
         TrackingTouchListener(final Monsters monsters) { mMonsters = monsters; }
+        private MonsterView monsterViewz;
 
         @Override public boolean onTouch(final View v, final MotionEvent evt) {
             final int action = evt.getAction();
@@ -58,14 +60,23 @@ public class MonsterMash extends Activity {
                     return false;
             }
 
-            for (final Integer i: tracks) {
+            for (final Integer i: tracks)
+            {
                 final int idx = evt.findPointerIndex(i);
-                addMonster(
-                        mMonsters,
-                        evt.getX(idx),
-                        evt.getY(idx),
-                        evt.getPressure(idx),
-                        evt.getSize(idx));
+                double q = evt.getX(idx) / (monsterViewz.getWidth() / 10);
+                Math.floor(q);
+                int myq = (int)q;
+                double p = evt.getY(idx) / (monsterViewz.getHeight() / 10);
+                Math.floor(p);
+                int myp = (int)p;
+                String myheight = String.valueOf (myp);
+                Log.d(" height ", myheight);
+                if (Color.GREEN == mMonsters.checkState(myq,myp))
+                {
+                    mMonsters.removeMonster(myq,myp);
+                }
+                //TODO I Think something needs to happen here look up up here
+
             }
             return true;
         }
@@ -109,21 +120,9 @@ public class MonsterMash extends Activity {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
-
-            int color;
-            switch (keyCode) {
-                case KeyEvent.KEYCODE_SPACE:
-                    color = Color.MAGENTA;
-                    break;
-                case KeyEvent.KEYCODE_ENTER:
-                    color = Color.BLUE;
-                    break;
-                default:
-                    return false;
-            }
-
+            int color = Color.RED;
             makeMonster(monsterModel, monsterView, color);
-
+            //TODO I Think something needs to happen here look up up here
             return true;
         });
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
@@ -158,7 +157,7 @@ public class MonsterMash extends Activity {
                     // ConcurrentModificationException on list of monsters
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                 }
-            }, /*initial delay*/ 0, /*periodic delay*/ 2000);
+            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
         }
     }
 
@@ -213,16 +212,12 @@ public class MonsterMash extends Activity {
      */
     int x = 0;
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
-        if (x <= 0){
-            monsters.clearMonsters();
-            x++;
-        }
-        color = Color.MAGENTA;
-
-            monsters.addMonster(
-                    (rand.nextInt(10)),
-                    (rand.nextInt(10)),
-                    color);
-
+        if (x <= 0)
+            {
+                monsters.clearMonsters();
+                x++;
+            }
+                color = Color.GREEN;
+        monsters.addMonster((rand.nextInt(10)), (rand.nextInt(10)), color);
     }
 }

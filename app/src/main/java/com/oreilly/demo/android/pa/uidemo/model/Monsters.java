@@ -76,6 +76,7 @@ public class Monsters {
     public int checkState (int x, int y){
         Monster temp = monsterArray[x][y];
         int color = temp.getColor();
+        //if color == Color.GREEN
         return color;
     }
 
