@@ -36,6 +36,7 @@ public class MonsterMash extends Activity {
     /** Score and Timer*/
     public int timeremaining = 30;
     public static int score = 0;
+    public int level = 1;
 
     public static void incScore() {
         score++;
@@ -158,7 +159,7 @@ public class MonsterMash extends Activity {
         );
 
     }
-
+    int q = 0;
 
     @Override public void onResume() {
         super.onResume();
@@ -171,7 +172,12 @@ public class MonsterMash extends Activity {
                 public void run() {
                     // must invoke makeMonster on the UI thread to avoid
                     // ConcurrentModificationException on list of monsters
-                    runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
+
+
+                    while (q < 5 + (level) ) {
+                        runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
+                        q++;
+                    }
                     runOnUiThread(() -> changeMonster(monsterModel));
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
@@ -179,7 +185,7 @@ public class MonsterMash extends Activity {
                 public void run() {
                 timeremaining--;
                 }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
+            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
 
         }
     }
@@ -234,6 +240,7 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     int x = 0;
+
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
         if (x <= 0)
             {
@@ -242,7 +249,10 @@ public class MonsterMash extends Activity {
                 x++;
             }
                 color = Color.GREEN;
-        monsters.addMonster((rand.nextInt(10)), (rand.nextInt(10)), color);
+
+            monsters.addMonster((rand.nextInt(10)), (rand.nextInt(10)), color);
+            q++;
+
     }
 
     void changeMonster(final Monsters monsters){
@@ -290,13 +300,16 @@ public class MonsterMash extends Activity {
                         else if (space == 7) {
                             x = -1; y = 0;
                         }
+                        if (i+x <= 9 && j+y <= 9 && j+y >= 0 && i+x >= 0)
+                        {
+                            monsters.moveMonsters(i, j, (i + x), (j + y));
+                        }
 
-                        monsters.moveMonsters(i, j, (i + x), (j + y));
 
                     }
                 }
             }
-//
+
         }
 
 

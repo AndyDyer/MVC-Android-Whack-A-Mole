@@ -55,7 +55,6 @@ public class Monsters {
     public int getY(int x, int y){
         return (int) monsterArray[x][y].getY();
     }
-
     public int getColor(int x, int y){
         return monsterArray[x][y].getColor();
     }
@@ -72,6 +71,7 @@ public class Monsters {
     public Monster getMonster(int i, int j){
         return monsterArray[i][j];
     }
+
     public int checkState (int x, int y){
         if(!spaceEmpty(x,y)) {
             Monster temp = monsterArray[x][y];
