@@ -34,9 +34,9 @@ public class MonsterMash extends Activity {
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
     /** Score and Timer*/
-    public int timeremaining = 30;
+    public static int timeremaining = 30;
     public static int score = 0;
-    public int level = 1;
+    public static int level = 1;
 
     public static void incScore() {
         score++;
