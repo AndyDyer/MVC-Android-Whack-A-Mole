@@ -45,7 +45,7 @@ public class Monsters {
         if (spaceEmpty(x,y))
             monsterArray[x][y] = new Monster(x, y, color);
        // monsters.add(new Monster(x, y, color));
-      //  notifyListener();
+         notifyListener();
 
     }
 

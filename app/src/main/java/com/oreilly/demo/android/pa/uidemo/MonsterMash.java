@@ -243,9 +243,9 @@ public class MonsterMash extends Activity {
             // monsters.addMonster(3,3,Color.GREEN);
             x++;
         }
+        for (int i = 0; i < 4; i++)
+            monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
 
-        monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
-        monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
 
 
     }
@@ -260,12 +260,12 @@ public class MonsterMash extends Activity {
                     chance = rand.nextInt(10);
                     if (chance >= 3){
                         if (monsters.getMonster(i,j).getColor() == Color.GREEN){
-                            monsters.removeMonster(i,j);
                             monsters.addMonster(i,j, Color.YELLOW);
+                            monsters.removeMonster(i, j);
                         }
                         else if (monsters.getMonster(i,j).getColor() == Color.YELLOW){
-                            monsters.removeMonster(i,j);
                             monsters.addMonster(i,j, Color.GREEN);
+                            monsters.removeMonster(i,j);
                         }
                     }
                     if (chance >=5){
