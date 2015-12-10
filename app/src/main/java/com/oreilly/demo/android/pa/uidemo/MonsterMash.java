@@ -36,10 +36,9 @@ public class MonsterMash extends Activity {
     /** Score and Timer*/
     public static int timeremaining = 30;
     public static int score = 0;
-<<<<<<< HEAD
     public static int level = 1;
-=======
->>>>>>> b7386f491b06d785aee60087cbe804a5dc567bee
+    public static int monstercap = 5 + level;
+
 
     public static void incScore() {
         score++;
@@ -147,10 +146,12 @@ public class MonsterMash extends Activity {
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
+        final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
+            tb3.setText("Level: " + level);
             monsterView.invalidate();
         });
 
@@ -163,31 +164,73 @@ public class MonsterMash extends Activity {
 
     }
 
-
+int q = 0;
     @Override public void onResume() {
         super.onResume();
         if (monsterGenerator == null) {
             monsterGenerator = new Timer();
+
+            // countdown timer
+            monsterTimer.schedule(new TimerTask() {
+                public void run() {
+                    timeremaining--;
+                }
+            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
             monsterTimer = new Timer();
             // generate new monsters, one every two seconds
+
             monsterGenerator.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     // must invoke makeMonster on the UI thread to avoid
                     // ConcurrentModificationException on list of monsters
-                    runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
+
+                    if (q < monstercap)
+                    {
+                        runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
+                        q++;
+                    }
+
+
                     runOnUiThread(() -> changeMonster(monsterModel));
+
+                    if (isOver(monsterModel) == true)
+                    {
+                        level ++;
+                        timeremaining ++;
+                        q = 0;
+                        // TODO something to this effect
+                    }
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
-            monsterTimer.schedule(new TimerTask() {
-                public void run() {
-                timeremaining--;
-                }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
+
 
         }
     }
 
+    public boolean isOver (Monsters monster)
+    {
+    int sum = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++)
+            {
+               if (monster.getMonster(i,j) != null)
+               {
+                   sum++;
+               }
+            }
+
+        }
+        if (sum == 0)
+        {
+            return true;
+                    // game is over
+        }
+        else
+        {
+            return false;
+        }
+    }
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
