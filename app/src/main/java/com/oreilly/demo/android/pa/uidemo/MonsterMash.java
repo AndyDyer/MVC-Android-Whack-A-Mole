@@ -34,11 +34,8 @@ public class MonsterMash extends Activity {
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
     /** Score and Timer*/
-    public static int timeremaining = 30;
+    public int timeremaining = 30;
     public static int score = 0;
-    public static int level = 1;
-    public static int monstercap = 5 + level;
-
 
     public static void incScore() {
         score++;
@@ -146,12 +143,10 @@ public class MonsterMash extends Activity {
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
-        final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
-            tb3.setText("Level: " + level);
             monsterView.invalidate();
         });
 
@@ -164,73 +159,33 @@ public class MonsterMash extends Activity {
 
     }
 
-int q = 0;
+
     @Override public void onResume() {
         super.onResume();
         if (monsterGenerator == null) {
             monsterGenerator = new Timer();
-
-            // countdown timer
-            monsterTimer.schedule(new TimerTask() {
-                public void run() {
-                    timeremaining--;
-                }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
             monsterTimer = new Timer();
             // generate new monsters, one every two seconds
-
             monsterGenerator.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     // must invoke makeMonster on the UI thread to avoid
                     // ConcurrentModificationException on list of monsters
-
-                    if (q < monstercap)
-                    {
-                        runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
-                        q++;
-                    }
-
-
+                    runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                     runOnUiThread(() -> changeMonster(monsterModel));
-
-                    if (isOver(monsterModel) == true)
-                    {
-                        level ++;
-                        timeremaining ++;
-                        q = 0;
-                        // TODO something to this effect
-                    }
+                    runOnUiThread(() -> monsterModel.checkBoard());
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
-
+            monsterTimer.schedule(new TimerTask() {
+                public void run() {
+                timeremaining--;
+                   // monsterModel.checkBoard();
+                }
+            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
 
         }
     }
 
-    public boolean isOver (Monsters monster)
-    {
-    int sum = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++)
-            {
-               if (monster.getMonster(i,j) != null)
-               {
-                   sum++;
-               }
-            }
-
-        }
-        if (sum == 0)
-        {
-            return true;
-                    // game is over
-        }
-        else
-        {
-            return false;
-        }
-    }
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
@@ -290,8 +245,10 @@ int q = 0;
             // monsters.addMonster(3,3,Color.GREEN);
             x++;
         }
-        for (int i = 0; i < 4; i++)
+        while ( i < 6) {
             monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
+            i++;
+        }
 
 
 
@@ -307,12 +264,13 @@ int q = 0;
                     chance = rand.nextInt(10);
                     if (chance >= 3){
                         if (monsters.getMonster(i,j).getColor() == Color.GREEN){
-                            monsters.addMonster(i,j, Color.YELLOW);
-                            monsters.removeMonster(i, j);
+                           monsters.removeMonster(i, j);
+                            monsters.addMonster(i, j, Color.YELLOW);
                         }
                         else if (monsters.getMonster(i,j).getColor() == Color.YELLOW){
-                            monsters.addMonster(i,j, Color.GREEN);
-                            monsters.removeMonster(i,j);
+
+                            monsters.removeMonster(i, j);
+                            monsters.addMonster(i, j, Color.GREEN);
                         }
                     }
                     if (chance >=5){
@@ -342,8 +300,10 @@ int q = 0;
                         else if (space == 7) {
                             x = -1; y = 0;
                         }
-
+                      if ((i + x) <= 9 && (j + y) <= 9 && (i + x) >= 0 && (j + y) >= 0 && monsters.spaceEmpty( (i + x), (j + y)))
                         monsters.moveMonsters(i, j, (i + x), (j + y));
+
+
 
                     }
                 }

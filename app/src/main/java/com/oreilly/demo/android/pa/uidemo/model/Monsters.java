@@ -45,7 +45,7 @@ public class Monsters {
         if (spaceEmpty(x,y))
             monsterArray[x][y] = new Monster(x, y, color);
        // monsters.add(new Monster(x, y, color));
-         notifyListener();
+         //notifyListener();
 
     }
 
@@ -65,7 +65,10 @@ public class Monsters {
                 monsterArray[i][j] = null;
             }
         }
-
+        notifyListener();
+    }
+    public void checkBoard() {
+        notifyListener();
     }
 
     public Monster getMonster(int i, int j){
@@ -76,11 +79,12 @@ public class Monsters {
         if(!spaceEmpty(x,y)) {
             Monster temp = monsterArray[x][y];
             int color = temp.getColor();
-            //if color == Color.GREEN
-            MonsterMash.incScore();
+            if (color == Color.GREEN)
+                MonsterMash.incScore();
             return color;
         }
         else {return 1;}
+
     }
 
 
@@ -90,21 +94,29 @@ public class Monsters {
     }
 
     public void moveMonsters(final int currentX, final int currentY, final int newX, final int newY){
-        if (newX <= 9 && newY <= 9 && newX >= 0 && newY >= 0) {
-            addMonster(newX, newY, Color.GREEN);
+        if (newX <= 9 && newY <= 9 && newX >= 0 && newY >= 0 && !spaceEmpty(currentX,currentY)) {
+            int color = monsterArray[currentX][currentY].getColor();
             removeMonster(currentX,currentY);
+            addMonster(newX, newY, color);
         }
+       // notifyListener();
+
     }
 
     public boolean spaceEmpty (final int x, final int y){
-        if (monsterArray[x][y] == null)
+        if (monsterArray[x][y] == null) {
+
             return true;
-        else
+        }
+        else {
+
             return false;
+        }
+
     }
 
     private void notifyListener() {
-        if (null != monstersChangeListener) {
+       if (null != monstersChangeListener) {
             monstersChangeListener.onMonstersChange(this);
         }
     }
