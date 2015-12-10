@@ -172,6 +172,7 @@ public class MonsterMash extends Activity {
                     // must invoke makeMonster on the UI thread to avoid
                     // ConcurrentModificationException on list of monsters
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
+                    runOnUiThread(() -> changeMonster(monsterModel));
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
             monsterTimer.schedule(new TimerTask() {
@@ -237,6 +238,7 @@ public class MonsterMash extends Activity {
         if (x <= 0)
             {
                 monsters.clearMonsters();
+               // monsters.addMonster(3,3,Color.GREEN);
                 x++;
             }
                 color = Color.GREEN;
@@ -244,12 +246,24 @@ public class MonsterMash extends Activity {
     }
 
     void changeMonster(final Monsters monsters){
+
+
         int chance, space,x = 0, y = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 if (!monsters.spaceEmpty(i, j)) {
                     chance = rand.nextInt(10);
-                    if (chance >=5){
+                    if (chance >= 0){
+                        if (monsters.getMonster(i,j).getColor() == Color.GREEN){
+                            monsters.removeMonster(i,j);
+                            monsters.addMonster(i,j, Color.YELLOW);
+                        }
+                        else if (monsters.getMonster(i,j).getColor() == Color.YELLOW){
+                            monsters.removeMonster(i,j);
+                            monsters.addMonster(i,j, Color.GREEN);
+                        }
+                    }
+                    if (chance >=0){
 
                         space = rand.nextInt(7);
                         if (space == 0) {
@@ -259,26 +273,26 @@ public class MonsterMash extends Activity {
                             x = 0; y = -1;
                         }
                         else if (space == 2) {
-                            x = +1; y = -1;
+                            x = 1; y = -1;
                         }
                         else if (space == 3) {
-                            x = +1; y = 0;
+                            x = 1; y = 0;
                         }
                         else if (space == 4) {
-                            x = +1; y = +1;
+                            x = 1; y = 1;
                         }
                         else if (space == 5) {
-                            x = 0; y = +1;
+                            x = 0; y = 1;
                         }
                         else if (space == 6) {
-                            x = -1; y = +1;
+                            x = -1; y = 1;
                         }
                         else if (space == 7) {
                             x = -1; y = 0;
                         }
-                        if (monsters.spaceEmpty(i,j) == true) {
-                            monsters.moveMonsters(i, j, i + x, j + y);
-                        }
+
+                        monsters.moveMonsters(i, j, (i + x), (j + y));
+
                     }
                 }
             }

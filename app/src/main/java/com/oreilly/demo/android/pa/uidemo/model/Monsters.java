@@ -1,5 +1,7 @@
 package com.oreilly.demo.android.pa.uidemo.model;
 
+import android.graphics.Color;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -64,16 +66,11 @@ public class Monsters {
                 monsterArray[i][j] = null;
             }
         }
-        notifyListener();
 
     }
 
     public Monster getMonster(int i, int j){
-
         return monsterArray[i][j];
-
-
-
     }
     public int checkState (int x, int y){
         if(!spaceEmpty(x,y)) {
@@ -93,9 +90,10 @@ public class Monsters {
     }
 
     public void moveMonsters(final int currentX, final int currentY, final int newX, final int newY){
-        monsterArray[newX][newY] = monsterArray [currentX][currentY];
-        monsterArray[currentX][currentY] = null;
-        notifyListener();
+        if (newX <= 9 && newY <= 9 && newX >= 0 && newY >= 0) {
+            removeMonster(currentX,currentY);
+            addMonster(newX, newY, Color.GREEN);
+        }
     }
 
     public boolean spaceEmpty (final int x, final int y){
