@@ -3,6 +3,8 @@ package com.oreilly.demo.android.pa.uidemo.model;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.oreilly.demo.android.pa.uidemo.MonsterMash;
 import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
 /** A list of dots. */
@@ -78,10 +80,12 @@ public class Monsters {
             Monster temp = monsterArray[x][y];
             int color = temp.getColor();
             //if color == Color.GREEN
+            MonsterMash.incScore();
             return color;
         }
         else {return 1;}
     }
+
 
     public void removeMonster (int x, int y){
         monsterArray[x][y] = null;

@@ -1,5 +1,6 @@
 package com.oreilly.demo.android.pa.uidemo;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +24,8 @@ import com.oreilly.demo.android.pa.uidemo.model.Monster;
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
+import org.junit.Test;
+
 
 /** Android UI demo program */
 public class MonsterMash extends Activity {
@@ -32,7 +35,12 @@ public class MonsterMash extends Activity {
     public static final int DOT_DIAMETER = 6;
     /** Score and Timer*/
     public int timeremaining = 30;
-    public int score = 0;
+    public static int score = 0;
+
+    public static void incScore() {
+        score++;
+    }
+
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
 
@@ -110,6 +118,8 @@ public class MonsterMash extends Activity {
     /** The monster generator */
     private Timer monsterGenerator;
 
+    private Timer monsterTimer;
+
     /** Called when the activity is first created. */
     @Override public void onCreate(final Bundle state) {
         super.onCreate(state);
@@ -154,6 +164,7 @@ public class MonsterMash extends Activity {
         super.onResume();
         if (monsterGenerator == null) {
             monsterGenerator = new Timer();
+            monsterTimer = new Timer();
             // generate new monsters, one every two seconds
             monsterGenerator.schedule(new TimerTask() {
                 @Override
@@ -163,6 +174,12 @@ public class MonsterMash extends Activity {
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
+            monsterTimer.schedule(new TimerTask() {
+                public void run() {
+                timeremaining--;
+                }
+            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
+
         }
     }
 
