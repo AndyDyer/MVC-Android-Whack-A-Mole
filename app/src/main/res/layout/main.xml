@@ -30,9 +30,9 @@
         android:focusable="false"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="0.45"/>
 
-    <EditText
+      <EditText
         android:id="@+id/text2"
         android:text="@string/defaultText"
         android:focusable="false"
@@ -47,7 +47,15 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
 
-    <Button
+      <EditText
+          android:id="@+id/text3"
+          android:text="@string/defaultText"
+          android:focusable="false"
+          android:layout_height="wrap_content"
+          android:layout_width="0dp"
+          android:layout_weight="1" />
+
+      <Button
         android:id="@+id/button1"
         android:text="Pause"
         android:textColor="@color/red"

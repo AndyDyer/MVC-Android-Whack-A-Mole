@@ -135,7 +135,8 @@ public class MonsterMash extends Activity {
         monsterView.setOnCreateContextMenuListener(this);
         monsterView.setOnTouchListener(new TrackingTouchListener(monsterModel));
 
-        monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
+        monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) ->
+        {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
@@ -144,10 +145,13 @@ public class MonsterMash extends Activity {
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
+        final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
+            tb3.setText("Level: " + level);
+
             monsterView.invalidate();
         });
 
@@ -179,6 +183,21 @@ public class MonsterMash extends Activity {
                         q++;
                     }
                     runOnUiThread(() -> changeMonster(monsterModel));
+                    if (IsOver(monsterModel) == true)
+                    {
+
+                        level++;
+                        timeremaining = 30;
+                        q= 0;
+                    }
+                    if (timeremaining == 0)
+                    {
+                        if (IsOver(monsterModel) == false)
+                        {
+                            //you lost
+                        }
+                    }
+
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
             monsterTimer.schedule(new TimerTask() {
@@ -189,7 +208,27 @@ public class MonsterMash extends Activity {
 
         }
     }
+    public boolean IsOver(final Monsters monsters)
+    {
+        int sum = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (monsters.getMonster(i,j) != null);
+                {
+                    sum++;
+                }
+            }
+        }
+        if (sum == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
+    }
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
