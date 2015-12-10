@@ -25,4 +25,5 @@ public final class Monster {
 
     /** @return the color. */
     public int getColor() { return color; }
+
 }

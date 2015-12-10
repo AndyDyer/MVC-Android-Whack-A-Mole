@@ -65,10 +65,10 @@ public class MonsterMash extends Activity {
             {
                 final int idx = evt.findPointerIndex(i);
 
-                double q = evt.getX(idx) / (monsterViewz.getScreenW() / 10);
+                double q = evt.getX(idx) / (v.getWidth() / 10);
                 Math.floor(q);
                 int myq = (int)q;
-                double p = evt.getY(idx) / (monsterViewz.getScreenH() / 10);
+                double p = evt.getY(idx) / (v.getHeight() / 10);
                 Math.floor(p);
                 int myp = (int)p;
 

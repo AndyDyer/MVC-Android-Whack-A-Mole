@@ -74,10 +74,13 @@ public class Monsters {
 
     }
     public int checkState (int x, int y){
-        Monster temp = monsterArray[x][y];
-        int color = temp.getColor();
-        //if color == Color.GREEN
-        return color;
+        if(!spaceEmpty(x,y)) {
+            Monster temp = monsterArray[x][y];
+            int color = temp.getColor();
+            //if color == Color.GREEN
+            return color;
+        }
+        else {return 1;}
     }
 
     public void removeMonster (int x, int y){
