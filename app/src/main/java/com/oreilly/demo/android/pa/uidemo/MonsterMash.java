@@ -35,6 +35,7 @@ public class MonsterMash extends Activity {
     public int score = 0;
     /** Listen for taps. */
     private static final class TrackingTouchListener implements View.OnTouchListener {
+
         private final Monsters mMonsters;
         private List<Integer> tracks = new ArrayList<>();
 
@@ -64,12 +65,14 @@ public class MonsterMash extends Activity {
             {
                 final int idx = evt.findPointerIndex(i);
 
-                double q = evt.getX(idx) / (monsterViewz.getWidth() / 10);
+                double q = evt.getX(idx) / (monsterViewz.getScreenW() / 10);
                 Math.floor(q);
                 int myq = (int)q;
-                double p = evt.getY(idx) / (monsterViewz.getHeight() / 10);
+                double p = evt.getY(idx) / (monsterViewz.getScreenH() / 10);
                 Math.floor(p);
                 int myp = (int)p;
+
+
 
 
                 String myheight = String.valueOf (myp);

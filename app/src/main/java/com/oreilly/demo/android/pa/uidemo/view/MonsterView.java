@@ -30,6 +30,16 @@ public class MonsterView extends View {
         setFocusableInTouchMode(true);
     }
 
+    public int getScreenW(){
+        int x = getWidth();
+        return x;
+    }
+    public int getScreenH(){
+        int x = getHeight();
+        return x;
+    }
+
+
     /**
      * @param context
      * @param attrs
@@ -125,7 +135,7 @@ public class MonsterView extends View {
 
                                         (((monsters.getMonster(i, j).getY() + 1) * (getHeight() / 10))),
                                         paint);
-                        DrawGrid(canvas,paintb);
+                        DrawGrid(canvas, paintb);
 
                     }
                 }
