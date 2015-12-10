@@ -26,4 +26,10 @@ public final class Monster {
     /** @return the color. */
     public int getColor() { return color; }
 
+   /* public Monster setXY(final float x, final  float y, Monster monster){
+        this.x = x;
+        this.y = y;
+        return monster;
+    }*/
+
 }

@@ -36,7 +36,10 @@ public class MonsterMash extends Activity {
     /** Score and Timer*/
     public static int timeremaining = 30;
     public static int score = 0;
+<<<<<<< HEAD
     public static int level = 1;
+=======
+>>>>>>> b7386f491b06d785aee60087cbe804a5dc567bee
 
     public static void incScore() {
         score++;
@@ -135,8 +138,7 @@ public class MonsterMash extends Activity {
         monsterView.setOnCreateContextMenuListener(this);
         monsterView.setOnTouchListener(new TrackingTouchListener(monsterModel));
 
-        monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) ->
-        {
+        monsterView.setOnKeyListener((final View v, final int keyCode, final KeyEvent event) -> {
             if (KeyEvent.ACTION_DOWN != event.getAction()) {
                 return false;
             }
@@ -145,13 +147,10 @@ public class MonsterMash extends Activity {
         // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
-        final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
-            tb3.setText("Level: " + level);
-
             monsterView.invalidate();
         });
 
@@ -163,7 +162,7 @@ public class MonsterMash extends Activity {
         );
 
     }
-    int q = 0;
+
 
     @Override public void onResume() {
         super.onResume();
@@ -176,59 +175,19 @@ public class MonsterMash extends Activity {
                 public void run() {
                     // must invoke makeMonster on the UI thread to avoid
                     // ConcurrentModificationException on list of monsters
-
-
-                    while (q < 5 + (level) ) {
-                        runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
-                        q++;
-                    }
+                    runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                     runOnUiThread(() -> changeMonster(monsterModel));
-                    if (IsOver(monsterModel) == true)
-                    {
-
-                        level++;
-                        timeremaining = 30;
-                        q= 0;
-                    }
-                    if (timeremaining == 0)
-                    {
-                        if (IsOver(monsterModel) == false)
-                        {
-                            //you lost
-                        }
-                    }
-
                 }
             }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
             monsterTimer.schedule(new TimerTask() {
                 public void run() {
                 timeremaining--;
                 }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
+            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
 
         }
     }
-    public boolean IsOver(final Monsters monsters)
-    {
-        int sum = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if (monsters.getMonster(i,j) != null);
-                {
-                    sum++;
-                }
-            }
-        }
-        if (sum == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
 
-    }
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
@@ -279,18 +238,19 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     int x = 0;
-
+    int i = 0;
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
+        color = Color.GREEN;
         if (x <= 0)
-            {
-                monsters.clearMonsters();
-               // monsters.addMonster(3,3,Color.GREEN);
-                x++;
-            }
-                color = Color.GREEN;
+        {
+            monsters.clearMonsters();
+            // monsters.addMonster(3,3,Color.GREEN);
+            x++;
+        }
+        for (int i = 0; i < 4; i++)
+            monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
 
-            monsters.addMonster((rand.nextInt(10)), (rand.nextInt(10)), color);
-            q++;
+
 
     }
 
@@ -302,17 +262,17 @@ public class MonsterMash extends Activity {
             for (int j = 0; j < 10; j++) {
                 if (!monsters.spaceEmpty(i, j)) {
                     chance = rand.nextInt(10);
-                    if (chance >= 0){
+                    if (chance >= 3){
                         if (monsters.getMonster(i,j).getColor() == Color.GREEN){
-                            monsters.removeMonster(i,j);
                             monsters.addMonster(i,j, Color.YELLOW);
+                            monsters.removeMonster(i, j);
                         }
                         else if (monsters.getMonster(i,j).getColor() == Color.YELLOW){
-                            monsters.removeMonster(i,j);
                             monsters.addMonster(i,j, Color.GREEN);
+                            monsters.removeMonster(i,j);
                         }
                     }
-                    if (chance >=0){
+                    if (chance >=5){
 
                         space = rand.nextInt(7);
                         if (space == 0) {
@@ -339,16 +299,13 @@ public class MonsterMash extends Activity {
                         else if (space == 7) {
                             x = -1; y = 0;
                         }
-                        if (i+x <= 9 && j+y <= 9 && j+y >= 0 && i+x >= 0)
-                        {
-                            monsters.moveMonsters(i, j, (i + x), (j + y));
-                        }
 
+                        monsters.moveMonsters(i, j, (i + x), (j + y));
 
                     }
                 }
             }
-
+//
         }
 
 
