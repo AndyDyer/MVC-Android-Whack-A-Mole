@@ -115,10 +115,10 @@ public class MonsterView extends View {
         */
 
         /** Monster Drawing*/
-        if (null == monsters)
+       /* if (null == monsters)
         {
             return;
-        }
+        }*/
 
         paint.setStyle(Style.FILL);
 

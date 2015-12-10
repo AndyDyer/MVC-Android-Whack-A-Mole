@@ -234,15 +234,20 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     int x = 0;
+    int i = 0;
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
+        color = Color.GREEN;
         if (x <= 0)
-            {
-                monsters.clearMonsters();
-               // monsters.addMonster(3,3,Color.GREEN);
-                x++;
-            }
-                color = Color.GREEN;
-        monsters.addMonster((rand.nextInt(10)), (rand.nextInt(10)), color);
+        {
+            monsters.clearMonsters();
+            // monsters.addMonster(3,3,Color.GREEN);
+            x++;
+        }
+
+        monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
+        monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
+
+
     }
 
     void changeMonster(final Monsters monsters){
@@ -253,7 +258,7 @@ public class MonsterMash extends Activity {
             for (int j = 0; j < 10; j++) {
                 if (!monsters.spaceEmpty(i, j)) {
                     chance = rand.nextInt(10);
-                    if (chance >= 0){
+                    if (chance >= 3){
                         if (monsters.getMonster(i,j).getColor() == Color.GREEN){
                             monsters.removeMonster(i,j);
                             monsters.addMonster(i,j, Color.YELLOW);
@@ -263,7 +268,7 @@ public class MonsterMash extends Activity {
                             monsters.addMonster(i,j, Color.GREEN);
                         }
                     }
-                    if (chance >=0){
+                    if (chance >=5){
 
                         space = rand.nextInt(7);
                         if (space == 0) {

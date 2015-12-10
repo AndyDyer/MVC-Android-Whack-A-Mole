@@ -45,7 +45,7 @@ public class Monsters {
         if (spaceEmpty(x,y))
             monsterArray[x][y] = new Monster(x, y, color);
        // monsters.add(new Monster(x, y, color));
-        notifyListener();
+      //  notifyListener();
 
     }
 
@@ -91,8 +91,8 @@ public class Monsters {
 
     public void moveMonsters(final int currentX, final int currentY, final int newX, final int newY){
         if (newX <= 9 && newY <= 9 && newX >= 0 && newY >= 0) {
-            removeMonster(currentX,currentY);
             addMonster(newX, newY, Color.GREEN);
+            removeMonster(currentX,currentY);
         }
     }
 
