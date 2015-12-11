@@ -45,8 +45,6 @@ public class Monsters {
         if (spaceEmpty(x,y))
             monsterArray[x][y] = new Monster(x, y, color);
        // monsters.add(new Monster(x, y, color));
-         //notifyListener();
-
     }
 
 
@@ -59,6 +57,7 @@ public class Monsters {
         }
         notifyListener();
     }
+
     public void checkBoard() {
         notifyListener();
     }
@@ -76,7 +75,6 @@ public class Monsters {
             return color;
         }
         else {return 1;}
-
     }
 
 
@@ -91,20 +89,13 @@ public class Monsters {
             removeMonster(currentX,currentY);
             addMonster(newX, newY, color);
         }
-
-
     }
 
     public boolean spaceEmpty (final int x, final int y){
         if (monsterArray[x][y] == null) {
-
             return true;
         }
-        else {
-
-            return false;
-        }
-
+        else {return false;}
     }
 
     private void notifyListener() {

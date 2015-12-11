@@ -192,6 +192,7 @@ public class MonsterMash extends Activity {
                         monsterGenerator.cancel();
                         onPause();
                         onRestart();
+                        score = 0;
                         timeremaining = 30;
                         level = 1;
                         onResume();
