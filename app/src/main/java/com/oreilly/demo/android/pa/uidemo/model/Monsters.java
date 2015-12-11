@@ -49,15 +49,7 @@ public class Monsters {
 
     }
 
-    public int getX(int x, int y){
-       return (int) monsterArray[x][y].getX();
-    }
-    public int getY(int x, int y){
-        return (int) monsterArray[x][y].getY();
-    }
-    public int getColor(int x, int y){
-        return monsterArray[x][y].getColor();
-    }
+
     /** Remove all dots. */
     public void clearMonsters() {
         for(int i = 0; i<10; i++) {
@@ -99,7 +91,7 @@ public class Monsters {
             removeMonster(currentX,currentY);
             addMonster(newX, newY, color);
         }
-       // notifyListener();
+
 
     }
 

@@ -128,7 +128,7 @@ public class MonsterMash extends Activity {
 
         // install the view
         setContentView(R.layout.main);
-//
+
         // find the monsters view
         monsterView = (MonsterView) findViewById(R.id.monsters);
         monsterView.setMonsters(monsterModel);
@@ -168,9 +168,13 @@ public class MonsterMash extends Activity {
         super.onResume();
         if (monsterGenerator == null) {
             monsterGenerator = new Timer();
-            monsterTimer = new Timer();
-            monsterTimer.schedule(new TimerTask() {
+
+            // generate new monsters, one every two seconds
+            monsterGenerator.schedule(new TimerTask() {
+                @Override
                 public void run() {
+
+
                     timeremaining--;
                     // monsterModel.checkBoard();
                     if (isOver(monsterModel) == true)
@@ -190,16 +194,9 @@ public class MonsterMash extends Activity {
                         timeremaining = 30;
                         level = 0;
                         onResume();
-                        //TODO put a popup here saying game over restarting. 
+                        //TODO put a popup here saying game over restarting.
                     }
-                }
-            }, /*initial delay*/ 2000, /*periodic delay*/ 1000);
-            // generate new monsters, one every two seconds
-            monsterGenerator.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    // must invoke makeMonster on the UI thread to avoid
-                    // ConcurrentModificationException on list of monsters
+                    
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                     runOnUiThread(() -> changeMonster(monsterModel));
                     runOnUiThread(() -> monsterModel.checkBoard());
