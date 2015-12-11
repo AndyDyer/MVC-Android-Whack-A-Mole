@@ -36,8 +36,8 @@ public class MonsterMash extends Activity {
     /** Score and Timer*/
     public int timeremaining = 30;
     public static int score = 0;
-    public static int level = 0;
-    public static int monstercap = 5 + level;
+    public  int level = 0;
+    public  int monstercap = 5 + level;
 
     public static void incScore() {
         score++;
@@ -89,7 +89,7 @@ public class MonsterMash extends Activity {
                 Log.d(" height ", myheight);
 
 
-                if (Color.GREEN == mMonsters.checkState(myq,myp))
+                if (Color.YELLOW == mMonsters.checkState(myq,myp))
                 {
                     mMonsters.removeMonster(myq,myp);
                 }
@@ -192,7 +192,7 @@ public class MonsterMash extends Activity {
                         //TODO OUT OF TIME Restart
                     }
                 }
-            }, /*initial delay*/ 2000, /*periodic delay*/ 2000);
+            }, /*initial delay*/ 2000, /*periodic delay*/ 1000);
             // generate new monsters, one every two seconds
             monsterGenerator.schedule(new TimerTask() {
                 @Override
@@ -204,7 +204,7 @@ public class MonsterMash extends Activity {
                     runOnUiThread(() -> monsterModel.checkBoard());
 
                 }
-            }, /*initial delay*/ 2000, /*periodic delay*/ 2000);
+            }, /*initial delay*/ 2000, /*periodic delay*/ 1000);
 
 
         }
@@ -290,7 +290,7 @@ public class MonsterMash extends Activity {
 
             x++;
         }
-        while ( i < monstercap) {
+        while ( i < 5 + level) {
             monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
             i++;
         }

@@ -79,7 +79,7 @@ public class Monsters {
         if(!spaceEmpty(x,y)) {
             Monster temp = monsterArray[x][y];
             int color = temp.getColor();
-            if (color == Color.GREEN)
+            if (color == Color.YELLOW)
                 MonsterMash.incScore();
             return color;
         }
