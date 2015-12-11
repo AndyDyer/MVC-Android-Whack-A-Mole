@@ -36,6 +36,8 @@ public class MonsterMash extends Activity {
     /** Score and Timer*/
     public int timeremaining = 30;
     public static int score = 0;
+    public static int level = 0;
+    public static int monstercap = 5 + level;
 
     public static void incScore() {
         score++;
@@ -140,13 +142,15 @@ public class MonsterMash extends Activity {
             }
             return true;
         });
-        // int timereaming = 30 , int score = 0; paint setstrokewidth to 5
+
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
+        final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
             final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
+            tb3.setText("Level: " + level);
             monsterView.invalidate();
         });
 
@@ -165,6 +169,30 @@ public class MonsterMash extends Activity {
         if (monsterGenerator == null) {
             monsterGenerator = new Timer();
             monsterTimer = new Timer();
+            monsterTimer.schedule(new TimerTask() {
+                public void run() {
+                    timeremaining--;
+                    // monsterModel.checkBoard();
+                    if (isOver(monsterModel) == true)
+                    {
+                        // game over
+                        i = 0;
+                        timeremaining = 30;
+                        level++;
+                    }
+
+                    if (timeremaining == 0)
+                    {
+                        timeremaining--;
+                        monsterTimer.cancel();
+                        onPause();
+                        onRestart();
+                        timeremaining = 30;
+                        level = 0;
+                        //TODO OUT OF TIME Restart
+                    }
+                }
+            }, /*initial delay*/ 2000, /*periodic delay*/ 2000);
             // generate new monsters, one every two seconds
             monsterGenerator.schedule(new TimerTask() {
                 @Override
@@ -174,18 +202,35 @@ public class MonsterMash extends Activity {
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                     runOnUiThread(() -> changeMonster(monsterModel));
                     runOnUiThread(() -> monsterModel.checkBoard());
+
                 }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 2000);
-            monsterTimer.schedule(new TimerTask() {
-                public void run() {
-                timeremaining--;
-                   // monsterModel.checkBoard();
-                }
-            }, /*initial delay*/ 5000, /*periodic delay*/ 1000);
+            }, /*initial delay*/ 2000, /*periodic delay*/ 2000);
+
 
         }
     }
 
+    public boolean isOver(Monsters monster)
+    {
+        int sum  = 0;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (monster.getMonster(i,j) != null)
+                {
+                sum++;
+                }
+
+            }
+        }
+        if (sum == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
@@ -242,10 +287,10 @@ public class MonsterMash extends Activity {
         if (x <= 0)
         {
             monsters.clearMonsters();
-            // monsters.addMonster(3,3,Color.GREEN);
+
             x++;
         }
-        while ( i < 6) {
+        while ( i < monstercap) {
             monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
             i++;
         }
@@ -308,9 +353,6 @@ public class MonsterMash extends Activity {
                     }
                 }
             }
-//
         }
-
-
     }
 }
