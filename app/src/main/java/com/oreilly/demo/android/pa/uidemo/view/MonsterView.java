@@ -48,6 +48,8 @@ public class MonsterView extends View {
         super(context, attrs);
         setFocusableInTouchMode(true);
     }
+
+    /** This function draws the grids everytime the monster is drawn to preserve the borders of a cell */
     public void DrawGrid(Canvas mycanvas, Paint mypaint)
     {
         int countx = 0;
@@ -62,10 +64,7 @@ public class MonsterView extends View {
             mycanvas.drawLine(countx2, county2, getWidth() - 1, county2, mypaint);
             county2 += getHeight() / 10;
         }
-        countx = 0;
-        county = 0;
-        countx2 = 0;
-        county2 = 0;
+
     }
 
     /**
@@ -94,14 +93,14 @@ public class MonsterView extends View {
         canvas.drawRect(0, 0, getWidth() - 1, getHeight() - 1, paint);
         paint.setColor(Color.BLACK);
         paint.setStrokeWidth(4);
-        /** grid */
+
         final Paint paintb = new Paint();
         paintb.setColor(Color.BLACK);
         paintb.setStrokeWidth(4);
         DrawGrid(canvas,paintb);
 
         paint.setStyle(Style.FILL);
-
+    // this draws monsters from 2d array to corresponding cell
 
             for (int i = 0; i < 10; i++) {
                 for (int j = 0; j < 10; j++) {

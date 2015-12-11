@@ -189,13 +189,13 @@ public class MonsterMash extends Activity {
                     if (timeremaining == 0)
                     {
                         timeremaining--;
-                        monsterTimer.cancel();
+                        monsterGenerator.cancel();
                         onPause();
                         onRestart();
                         timeremaining = 30;
-                        level = 0;
+                        level = 1;
                         onResume();
-                        //TODO put a popup here saying game over restarting.
+
                     }
 
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
@@ -350,8 +350,6 @@ public class MonsterMash extends Activity {
                         }
                       if ((i + x) <= 9 && (j + y) <= 9 && (i + x) >= 0 && (j + y) >= 0 && monsters.spaceEmpty( (i + x), (j + y)))
                         monsters.moveMonsters(i, j, (i + x), (j + y));
-
-
 
                     }
                 }
