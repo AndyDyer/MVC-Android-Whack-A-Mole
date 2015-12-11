@@ -189,7 +189,8 @@ public class MonsterMash extends Activity {
                         onRestart();
                         timeremaining = 30;
                         level = 0;
-                        //TODO OUT OF TIME Restart
+                        onResume();
+                        //TODO put a popup here saying game over restarting. 
                     }
                 }
             }, /*initial delay*/ 2000, /*periodic delay*/ 1000);
