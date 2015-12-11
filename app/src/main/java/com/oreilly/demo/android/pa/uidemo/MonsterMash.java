@@ -70,11 +70,11 @@ public class MonsterMash extends Activity {
                 default:
                     return false;
             }
-
+            //Analyzes the touches on the screen
             for (final Integer i: tracks)
             {
                 final int idx = evt.findPointerIndex(i);
-
+                //Rounds touch locations of the points
                 double q = evt.getX(idx) / (v.getWidth() / 10);
                 Math.floor(q);
                 int myq = (int)q;
@@ -88,9 +88,10 @@ public class MonsterMash extends Activity {
                 String myheight = String.valueOf (myp);
                 Log.d(" height ", myheight);
 
-
+                //Sees if the monster is vulnerable
                 if (Color.YELLOW == mMonsters.checkState(myq,myp))
                 {
+                    //If it is it is removed from the 2D array
                     mMonsters.removeMonster(myq,myp);
                 }
                 //TODO I Think something needs to happen here look up up here
@@ -98,7 +99,7 @@ public class MonsterMash extends Activity {
             }
             return true;
         }
-
+        //Adds a monster
         private void addMonster(
                 final Monsters monsters,
                 final float x,
@@ -142,7 +143,7 @@ public class MonsterMash extends Activity {
             }
             return true;
         });
-
+        //Links to the XML for buttons
         final EditText tb1 = (EditText) findViewById(R.id.text1);
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         final EditText tb3 = (EditText) findViewById(R.id.text3);
@@ -163,7 +164,7 @@ public class MonsterMash extends Activity {
 
     }
 
-
+    //Starts when the game is started or unpaused
     @Override public void onResume() {
         super.onResume();
         if (monsterGenerator == null) {
@@ -207,7 +208,7 @@ public class MonsterMash extends Activity {
 
         }
     }
-
+    //Checks if the game is over - Has 0 monsters
     public boolean isOver(Monsters monster)
     {
         int sum  = 0;
@@ -229,6 +230,7 @@ public class MonsterMash extends Activity {
             return false;
         }
     }
+    //Pauses the game
     @Override public void onPause() {
         super.onPause();
         if (monsterGenerator != null) {
@@ -280,6 +282,7 @@ public class MonsterMash extends Activity {
      */
     int x = 0;
     int i = 0;
+    //Randomly makes the monsters
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
         color = Color.GREEN;
         if (x <= 0)
@@ -297,6 +300,7 @@ public class MonsterMash extends Activity {
 
     }
 
+    //Changes the monster's location
     void changeMonster(final Monsters monsters){
 
 
@@ -316,6 +320,7 @@ public class MonsterMash extends Activity {
                             monsters.addMonster(i, j, Color.GREEN);
                         }
                     }
+                    //checks which square it will move to
                     if (chance >=5){
 
                         space = rand.nextInt(7);
