@@ -196,7 +196,7 @@ public class MonsterMash extends Activity {
                         onResume();
                         //TODO put a popup here saying game over restarting.
                     }
-                    
+
                     runOnUiThread(() -> makeMonster(monsterModel, monsterView, Color.BLACK));
                     runOnUiThread(() -> changeMonster(monsterModel));
                     runOnUiThread(() -> monsterModel.checkBoard());

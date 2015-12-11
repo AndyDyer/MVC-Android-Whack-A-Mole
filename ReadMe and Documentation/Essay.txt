@@ -1,0 +1,22 @@
+Our project Monster Mash follows the Model View Controller. The Model is both the Monster object and
+the array of monster objects class called Monsters. This manipulates the View to display
+information. While at the same time takes its inputs from the controller Monster Mash class.
+Our Model objects follow the Open/closed principle of SOLID, as our monster entity is very
+extendable but modifiable.  All of o our classes also follow the single responsibility
+principle as changes are very local to the class as there is no overt dependency. We also used
+the Dependency inversion principle to depend only on our abstraction of monsters.  Our single
+timer based system is perfectly concurrent because of its singularity.  At first we
+attempted to use multiple timers and it was problematic. We realized that one this was
+flawed and secondly against the projects specification. This was a great moment for us
+that made us feel like we were going to be very successful.  Testability was very hard
+for us. Frankly we didn’t use JUnit Testing until towards the end of the project. Simply
+ put it was faster to run the emulator than comprehend a test for simple things.
+ We did print values to the log using the Log function to print to the debug log. However testing
+ came very handy towards the end of the development process when we were having disappearing
+ monsters for no reason. Having testability available to compare what was on screen to what was
+ stored in the data structure was there or not.  It was also nice to have our monsters all running
+  on the same thread as opposed to being autonomous from each other.  Seeing John O’Sullivan’s
+  example where each monster was its own thread seemed like a nightmare.  This project was hard but
+  very rewarding to learn how to deal with concurrency.
+
+  See the MVC Domain Model.png to see our domain model in a brief graphic. 
