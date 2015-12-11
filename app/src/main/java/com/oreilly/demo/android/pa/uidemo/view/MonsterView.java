@@ -9,7 +9,7 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.oreilly.demo.android.pa.uidemo.model.Monster;
+
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 
 

@@ -1,6 +1,6 @@
 package com.oreilly.demo.android.pa.uidemo;
 
-import java.sql.Time;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +20,7 @@ import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 
-import com.oreilly.demo.android.pa.uidemo.model.Monster;
+
 import com.oreilly.demo.android.pa.uidemo.model.Monsters;
 import com.oreilly.demo.android.pa.uidemo.view.MonsterView;
 
@@ -30,7 +30,7 @@ import org.junit.Test;
 /** Android UI demo program */
 public class MonsterMash extends Activity {
 
-
+    int i = 0;
     /** Monster diameter */
     public static final int DOT_DIAMETER = 6;
     /** Score and Timer*/
@@ -121,7 +121,7 @@ public class MonsterMash extends Activity {
     /** The monster generator */
     private Timer monsterGenerator;
 
-    private Timer monsterTimer;
+
 
     /** Called when the activity is first created. */
     @Override public void onCreate(final Bundle state) {
@@ -148,7 +148,6 @@ public class MonsterMash extends Activity {
         final EditText tb2 = (EditText) findViewById(R.id.text2);
         final EditText tb3 = (EditText) findViewById(R.id.text3);
         monsterModel.setMonstersChangeListener((Monsters monsters) -> {
-            final Monster d = monsters.getLastMonster();
             tb1.setText("Score: " + score);
             tb2.setText("Time Left: " + timeremaining);
             tb3.setText("Level: " + level);
@@ -188,6 +187,7 @@ public class MonsterMash extends Activity {
 
                     if (timeremaining == 0)
                     {
+
                         timeremaining--;
                         monsterGenerator.cancel();
                         onPause();
@@ -195,6 +195,7 @@ public class MonsterMash extends Activity {
                         score = 0;
                         timeremaining = 30;
                         level = 1;
+                        i = 0;
                         onResume();
 
                     }
@@ -209,6 +210,8 @@ public class MonsterMash extends Activity {
 
         }
     }
+
+
     //Checks if the game is over - Has 0 monsters
     public boolean isOver(Monsters monster)
     {
@@ -282,29 +285,23 @@ public class MonsterMash extends Activity {
      * @param color the color of the monster
      */
     int x = 0;
-    int i = 0;
     //Randomly makes the monsters
     void makeMonster(final Monsters monsters, final MonsterView view, int color) {
         color = Color.GREEN;
         if (x <= 0)
         {
+            //fills board with nulls
             monsters.clearMonsters();
-
             x++;
         }
         while ( i < 5 + level) {
             monsters.addMonster((rand.nextInt(9)), (rand.nextInt(9)), color);
             i++;
         }
-
-
-
     }
 
-    //Changes the monster's location
+    //Changes the monster's location and state (color)
     void changeMonster(final Monsters monsters){
-
-
         int chance, space,x = 0, y = 0;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -316,7 +313,6 @@ public class MonsterMash extends Activity {
                             monsters.addMonster(i, j, Color.YELLOW);
                         }
                         else if (monsters.getMonster(i,j).getColor() == Color.YELLOW){
-
                             monsters.removeMonster(i, j);
                             monsters.addMonster(i, j, Color.GREEN);
                         }
