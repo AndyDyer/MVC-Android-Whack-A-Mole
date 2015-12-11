@@ -19,4 +19,4 @@ for us. Frankly we didn’t use JUnit Testing until towards the end of the proje
   example where each monster was its own thread seemed like a nightmare.  This project was hard but
   very rewarding to learn how to deal with concurrency.
 
-  See the MVC Domain Model.png to see our domain model in a brief graphic. 
+  See the MVC Model.png to see our domain model in a brief graphic.
